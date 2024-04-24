@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semantic Search Engine</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #C5E1A5;
+        }
+        .video-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+video {
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+        .con-style {
+            background: #efefef;
+            -webkit-box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
+            box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-label {
+            font-size: .8em;
+            letter-spacing: 1px;
+            color: rgb(120, 120, 120);
+            transition: ease .3s;
+        }
+
+        .form-control {
+            border: 1px solid #c4d1dd;
+        }
+        .btn-custom {
+        background-color: #243b02; /* Dark red background color */
+        color: #fff; /* White text color */
+    }
+
+    .btn-custom:hover {
+        background-color: #1dd31d; /* Dark red background color on hover */
+    }
+
+        .positive {
+            background-color: #d1e7dd;
+            border: #a3cfbb 1px solid;
+            border-radius: 6px;
+            padding: 10px;
+            color: #0a3622;
+            font-weight: bold;
+        }
+
+        .negative {
+            background-color: #f8d7da;
+            border: #f1aeb5 1px solid;
+            border-radius: 6px;
+            padding: 10px;
+            color: #58151c;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="video-container">
+        <video autoplay loop muted>
+            <source src="{{ url_for('static', filename='video/video3.mp4') }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div class="container mt-4 mb-4">
+        <div class="row p-3">
+            <div class="col-md-8 offset-md-2 con-style p-4">
+                <h1 class="mb-4 text-center">Document Search</h1>
+                <form id="search-form" method="post" action="/">
+                    <div class="mb-3"> <label for="query" class="form-label">Enter your query:</label> <input type="text" class="form-control" id="query" name="query"> </div>
+                    <div class="mb-3 text-center"> <button type="submit" class="btn btn-custom">Search</button> </div>
+                </form>
+                {% if documents %}
+                <div id="results" class="alert alert-success">
+                    <h2>Top Documents:</h2>
+                    <ul id="document-list">
+                        {% for document in documents %}
+                        <li>{{ document }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
